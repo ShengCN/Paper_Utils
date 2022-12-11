@@ -22,6 +22,7 @@ def zoom_in(img, corner, boundary_params:dict):
     padding = boundary_params['padding']
     color   = boundary_params['color']
 
+    c = img.shape[-1]
     ret = img.copy()
     h, w = hpatch, wpatch
     padding_region = np.ones((h, w, 1))
@@ -31,9 +32,9 @@ def zoom_in(img, corner, boundary_params:dict):
 
     hc, wc = corner
     patch_h, patch_w = slice(hc, hc + hpatch), slice(wc, wc+wpatch)
-    patch_ret = composite(color_patch, ret[patch_h, patch_w], padding_region)
+    patch_ret = composite(color_patch, ret[patch_h, patch_w, :3], padding_region)
 
-    ret[patch_h, patch_w] = patch_ret
+    ret[patch_h, patch_w, :3] = patch_ret
 
     return ret, patch_ret
 
