@@ -28,7 +28,8 @@ def zoom_in(img, corner, boundary_params:dict):
     padding_region = np.ones((h, w, 1))
     hslice, wslice = slice(padding, h-padding), slice(padding, w-padding)
     padding_region[hslice, wslice, :] = 0.0
-    color_patch = np.ones((h, w, 3)) * color
+
+    color_patch = np.ones((h, w, 3)) * np.array(color)
 
     hc, wc = corner
     patch_h, patch_w = slice(hc, hc + hpatch), slice(wc, wc+wpatch)
